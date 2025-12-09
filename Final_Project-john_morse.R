@@ -9,10 +9,11 @@ init_flag <- FALSE
 
 # Embed flag indicates if chunks need creating and embedding.
 # If FALSE, load needed files from CSV.
-embed_flag <- TRUE
+embed_flag <- FALSE
 
 
 #---- Initialization ----
+
 ## Load in documents. 
 ## This creates a "library" of executive order documents that
 ## will be referenced to summarize information.
@@ -135,7 +136,7 @@ if (!embed_flag) {
 
 #---- Embed RAG Corpus ----
 
-## Need the Embedding model to embed query and chunks.
+# Need the Embedding model to embed query and chunks.
 # Import the sentence_transformers Python library
 sentence_transformers <- import("sentence_transformers")
 # Load a specific pre-trained model: all-MiniLM-L6-v2
@@ -165,6 +166,7 @@ if (!embed_flag) {
 
 
 #---- Fetch Top Chunks ----
+
 ## Functions to retrieve RAG chunks based on cosine similarity
 
 ## Define a function to return cosine similarity
@@ -230,6 +232,7 @@ get_overview <- function(aquery,
 }
 
 #---- Get Document Summaries ----
+
 ## Function to get summaries of the most relevant
 ## executive orders from the corpus based on the query.
 get_doc_summaries <- function(aquery,
@@ -284,6 +287,7 @@ get_doc_summaries <- function(aquery,
 }
 
 #---- Generate Full Response ----
+
 # In one request, respond to a query with both
 # an overview and document summaries.
 generate_response <- function(query) {
